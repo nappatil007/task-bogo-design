@@ -24,8 +24,7 @@ h1 {
     padding: 10px;
     cursor: pointer;
     display: flex;
-    align-items: center;
-    align-content: center;
+    
 }
 
 .bogo-box1.expanded {
@@ -60,6 +59,10 @@ h1 {
 
 .price {
     font-weight: bold;
+}
+.custom-mt-text-left{
+    text-align: left;
+    margin-top: 5px;
 }
 
 .strikethrough {
