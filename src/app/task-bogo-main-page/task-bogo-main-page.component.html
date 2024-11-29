@@ -1,0 +1,113 @@
+<div class="bogo-container">
+    <h1>YAY! It’s BOGO</h1>
+
+    <!-- One Unit -->
+    <div class="bogo-box1" (click)="expandBox('upper')" [class.expanded]="expandedBox === 'upper'">
+        <div>
+            <input type="radio" name="bogo" />
+        </div>
+        <div class="full-width">
+            <div class="header">
+                <div>
+                    <div>
+                        <span>1 Unit <span class="discount">10% Off</span></span>
+                    </div>
+                    <div>
+                        Standard Price
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <span>$10.00 USD</span> 
+                    </div>
+                    <div>
+                        <span class="strikethrough">$24.00 USD</span>
+                    </div>
+                </div>
+            </div>
+            <div class="details" *ngIf="expandedBox === 'upper'">
+                <div class="row">
+                    <label>#1</label>
+                    <select>
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                    </select>
+                    <select>
+                        <option value="black">Black</option>
+                        <option value="white">White</option>
+                    </select>
+                </div>
+                <div class="row">
+                    <label>#2</label>
+                    <select>
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                    </select>
+                    <select>
+                        <option value="black">Black</option>
+                        <option value="white">White</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Two Units -->
+    <div class="bogo-box" (click)="expandBox('middle')" [class.expanded]="expandedBox === 'middle'">
+        <div class="header">
+            <input type="radio" name="bogo" />
+            <div>
+                <span>2 Unit <span class="discount">20% Off</span></span>
+                <span class="price">
+                    <span class="strikethrough">$24.00 USD</span> $18.00 USD
+                </span>
+            </div>
+        </div>
+        <div class="details" *ngIf="expandedBox === 'middle'">
+            <div class="row">
+                <label>#1</label>
+                <select>
+                    <option value="S">S</option>
+                    <option value="M">M</option>
+                    <option value="L">L</option>
+                </select>
+                <select>
+                    <option value="black">Black</option>
+                    <option value="white">White</option>
+                </select>
+            </div>
+            <div class="row">
+                <label>#2</label>
+                <select>
+                    <option value="S">S</option>
+                    <option value="M">M</option>
+                    <option value="L">L</option>
+                </select>
+                <select>
+                    <option value="black">Black</option>
+                    <option value="white">White</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- Three Units -->
+    <div class="bogo-box" (click)="expandBox('lower')" [class.expanded]="expandedBox === 'lower'">
+        <div class="header">
+            <input type="radio" name="bogo" />
+            <div>
+                <span>3 Unit <span class="discount">30% Off</span></span>
+                <span class="price">
+                    <span class="strikethrough">$24.00 USD</span> $24.00 USD
+                </span>
+            </div>
+        </div>
+        <div class="details" *ngIf="expandedBox === 'lower'">
+            <p>Free Delivery</p>
+        </div>
+    </div>
+
+    <button class="add-to-cart">+ Add to Cart</button>
+</div>
