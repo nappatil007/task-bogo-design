@@ -1,112 +1,57 @@
 <div class="bogo-container">
     <h1>YAY! It’s BOGO</h1>
 
-    <!-- One Unit -->
-    <div class="bogo-box1" (click)="expandBox('upper')" [class.expanded]="expandedBox === 'upper'">
-        <div>
-            <input type="radio" name="bogo" />
+    <div
+        *ngFor="let unit of units"
+        class="bogo-box"
+        (click)="expandBox(unit.id)"
+        [class.expanded]="expandedBox === unit.id"
+    >
+        <!-- MOST POPULAR Badge -->
+        <div  class="badge" *ngIf="unit.id === 'middle' && expandedBox === 'middle'">
+            MOST POPULAR
         </div>
-        <div class="full-width">
-            <div class="header">
-                <div>
+
+        <div class="header">
+            <input type="radio" [class.align-start]="expandedBox === unit.id" name="bogo" [checked]="expandedBox === unit.id"/>
+            <div class="custom-width-100">
+                <div class="full-width">
                     <div>
-                        <span>1 Unit <span class="discount">10% Off</span></span>
-                    </div>
-                    <div class="custom-mt-text-left">
-                        Standard Price
-                    </div>
-                </div>
-                <div>
-                    <div>
-                        <span>$10.00 USD</span> 
+                        <span>{{ unit.label }} <span class="discount">{{ unit.discount }}% Off</span></span>
+                        <div class="custom-mt-text-left">Standard Price</div>
                     </div>
                     <div>
-                        <span class="strikethrough">$24.00 USD</span>
+                        <div>
+                            <span class="discounted-price">{{ calculateDiscountedPrice(unit.price, unit.discount) | currency: 'USD' }} USD</span>
+                        </div>
+                        <div class="strikethrough">
+                            {{ unit.price | currency: 'USD' }} USD
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="details" *ngIf="expandedBox === 'upper'">
-                <div class="row">
-                    <label>#1</label>
-                    <select>
-                        <option value="S">S</option>
-                        <option value="M">M</option>
-                        <option value="L">L</option>
-                    </select>
-                    <select>
-                        <option value="black">Black</option>
-                        <option value="white">White</option>
-                    </select>
-                </div>
-                <div class="row">
-                    <label>#2</label>
-                    <select>
-                        <option value="S">S</option>
-                        <option value="M">M</option>
-                        <option value="L">L</option>
-                    </select>
-                    <select>
-                        <option value="black">Black</option>
-                        <option value="white">White</option>
-                    </select>
+
+                
+                <div class="details" *ngIf="expandedBox === unit.id">
+                    <div *ngFor="let item of [].constructor(unit.quantity); let i = index" class="expanded-rows">
+                        <label>#{{ i + 1 }}</label>
+                        <select (click)="$event.stopPropagation()">
+                            <option value="S">S</option>
+                            <option value="M">M</option>
+                            <option value="L">L</option>
+                        </select>
+                        <select (click)="$event.stopPropagation()">
+                            <option value="black">Black</option>
+                            <option value="white">White</option>
+                        </select>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Two Units -->
-    <div class="bogo-box" (click)="expandBox('middle')" [class.expanded]="expandedBox === 'middle'">
-        <div class="header">
-            <input type="radio" name="bogo" />
-            <div>
-                <span>2 Unit <span class="discount">20% Off</span></span>
-                <span class="price">
-                    <span class="strikethrough">$24.00 USD</span> $18.00 USD
-                </span>
-            </div>
-        </div>
-        <div class="details" *ngIf="expandedBox === 'middle'">
-            <div class="row">
-                <label>#1</label>
-                <select>
-                    <option value="S">S</option>
-                    <option value="M">M</option>
-                    <option value="L">L</option>
-                </select>
-                <select>
-                    <option value="black">Black</option>
-                    <option value="white">White</option>
-                </select>
-            </div>
-            <div class="row">
-                <label>#2</label>
-                <select>
-                    <option value="S">S</option>
-                    <option value="M">M</option>
-                    <option value="L">L</option>
-                </select>
-                <select>
-                    <option value="black">Black</option>
-                    <option value="white">White</option>
-                </select>
-            </div>
-        </div>
-    </div>
-
-    <!-- Three Units -->
-    <div class="bogo-box" (click)="expandBox('lower')" [class.expanded]="expandedBox === 'lower'">
-        <div class="header">
-            <input type="radio" name="bogo" />
-            <div>
-                <span>3 Unit <span class="discount">30% Off</span></span>
-                <span class="price">
-                    <span class="strikethrough">$24.00 USD</span> $24.00 USD
-                </span>
-            </div>
-        </div>
-        <div class="details" *ngIf="expandedBox === 'lower'">
-            <p>Free Delivery</p>
-        </div>
+    <div class="footer">
+        <span class="free-delivery">Free Delivery</span>
+        <span class="total-price"> Total: {{ calculateTotalPrice() | currency: 'USD' }} USD</span>
     </div>
 
     <button class="add-to-cart">+ Add to Cart</button>
