@@ -1,5 +1,11 @@
 <div class="bogo-container">
-    <h1>YAY! It’s BOGO</h1>
+
+    <div class="heading-container">
+        <div class="line"></div>
+        <h1>YAY! It’s BOGO</h1>
+        <div class="line"></div>
+    </div>
+    
 
     <div
         *ngFor="let unit of units"
@@ -17,7 +23,7 @@
             <div class="custom-width-100">
                 <div class="full-width">
                     <div>
-                        <span>{{ unit.label }} <span class="discount">{{ unit.discount }}% Off</span></span>
+                        <span class="fw-600">{{ unit.label }} <span class="discount">{{ unit.discount }}% Off</span></span>
                         <div class="custom-mt-text-left">Standard Price</div>
                     </div>
                     <div>
@@ -32,14 +38,18 @@
 
                 
                 <div class="details" *ngIf="expandedBox === unit.id">
+                    <div class="header-selectbox">
+                        <div class="size">Size</div>
+                        <div class="color">Color</div>
+                    </div>
                     <div *ngFor="let item of [].constructor(unit.quantity); let i = index" class="expanded-rows">
                         <label>#{{ i + 1 }}</label>
-                        <select (click)="$event.stopPropagation()">
+                        <select [(ngModel)]="unit.selectedSizes[i]" (click)="$event.stopPropagation()">
                             <option value="S">S</option>
                             <option value="M">M</option>
                             <option value="L">L</option>
                         </select>
-                        <select (click)="$event.stopPropagation()">
+                        <select [(ngModel)]="unit.selectedColors[i]" (click)="$event.stopPropagation()">
                             <option value="black">Black</option>
                             <option value="white">White</option>
                         </select>
@@ -54,5 +64,8 @@
         <span class="total-price"> Total: {{ calculateTotalPrice() | currency: 'USD' }} USD</span>
     </div>
 
-    <button class="add-to-cart">+ Add to Cart</button>
+    <!-- <button class="add-to-cart" (click)="onAddToCart()">+ Add to Cart</button> -->
+    <button class="add-to-cart" (click)="onAddToCart()">
+        <span class="plus-icon"></span> Add to Cart
+      </button>
 </div>
